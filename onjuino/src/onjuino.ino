@@ -4,10 +4,9 @@
 #include <FreeRTOS.h>
 #include <Adafruit_NeoPixel.h>
 
-#if __has_include("git_hash.h") // optionally setup post-commit hook to generate git_hash.h
-#include "git_hash.h"
+#ifdef FW_VERSION 
 #else
-#define GIT_HASH "------"
+#define FW_VERSION "------"
 #endif
 
 #define BOARD_V3
@@ -112,7 +111,7 @@ void setup()
     Serial.println();
 
     Serial.println("Board version: " + String(BOARD_NAME));
-    Serial.println("Git hash:" + String(GIT_HASH));
+    Serial.println("FW Version:" + String(FW_VERSION));
 
     pinMode(MUTE, INPUT_PULLUP);
 
@@ -201,7 +200,7 @@ void setup()
 
     Serial.println("Sending multicast packet to announce presence");
     udp.beginPacket(IPAddress(239, 0, 0, 1), 12345);
-    String mcast_string = String(hostname) + " " + String(GIT_HASH);
+    String mcast_string = String(hostname) + " " + String(FW_VERSION);
     udp.write(reinterpret_cast<const uint8_t *>(mcast_string.c_str()), mcast_string.length());
     udp.endPacket();
 
