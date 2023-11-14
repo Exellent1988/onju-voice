@@ -1,0 +1,20 @@
+services:
+ 
+
+  server:
+    build: .
+    command: python server.py --n --ha  --send --whisper base.en
+    volumes:
+      - ./server_data/config:/server/config
+      - ./server_data/logs:/server/logs
+      - ./server_data/audio:/server/data
+    
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "12345:12345"
+    environment:
+      - EL_TOKEN=<elevlabs token>
+      - HA_TOKEN=<ha access token>
+      - HA_URL=< ha url like http://192.168.178.100:8123/ >
+      - OPENAI_API_KEY=<openai secret key >
