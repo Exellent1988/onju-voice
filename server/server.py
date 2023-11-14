@@ -240,9 +240,6 @@ def show_git_hash():
         print("An error occurred while retrieving the Git hash.")
 
 def load_and_validate_config(filename):
-    if not os.path.exists("credentials.json"):
-        raise FileNotFoundError(f"credentials.json not found. See credentials.json.example for an example")
-    
     with open(filename, 'r') as f:
         config = yaml.safe_load(f)
     
@@ -259,7 +256,7 @@ def load_and_validate_config(filename):
     return config
 
 def main(**kwargs):
-    config = load_and_validate_config('config.yaml')
+    config = load_and_validate_config('./config/config.yaml')
 
     ConfigUpdater(config).update(**kwargs)
 
@@ -271,7 +268,7 @@ def main(**kwargs):
     if(config['use_notes']):
         print(f"\n📝 Notes are enabled, using {config['notes_file']}")
 
-    show_git_hash()
+    # show_git_hash()
 
     queue = Queue()
     manager = DeviceManager(config)

@@ -5,11 +5,10 @@ from datetime import datetime
 from pydub import AudioSegment
 from rich import print
 
+
 class ElevenLabs:
     def __init__(self, config):
-        with open("credentials.json", "r") as f:
-            cred = json.load(f)
-        token = cred.get("elevenlabs_token")
+        token = os.getenv('EL_TOKEN')
         self.headers = {
             'Content-Type': 'application/json',
             'xi-api-key': token

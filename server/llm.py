@@ -183,10 +183,8 @@ class OpenAIFunctionCalling:
 
         # this requires a Home Assistant server running - see https://www.home-assistant.io/installation/linux#docker-compose
         if(self.config['use_home_assistant']):
-            with open('credentials.json') as json_file:
-                cred = json.load(json_file)
-            HA_URL = cred['home_assistant_url']
-            HA_TOKEN = cred['home_assistant_token']
+            HA_TOKEN = os.getenv('HA_TOKEN')
+            HA_URL = os.getenv('HA_URL')
 
             print(f"\n🏡 Fetching lights from Home Assistant at {HA_URL} to add to function definition for OpenAI")
             
@@ -325,10 +323,8 @@ class OpenAIFunctionCalling:
             return "Sent dummy message"
         
     def control_light(self, device, entity_id, rgb_color=None, brightness=None):
-        with open("credentials.json", "r") as f:
-            cred = json.load(f)
-        HA_TOKEN = cred.get("home_assistant_token")
-        HA_URL = cred.get("home_assistant_url")
+        HA_TOKEN = os.getenv('HA_TOKEN')
+        HA_URL = os.getenv('HA_URL')
 
         params={"entity_id": entity_id}
         if(rgb_color):
