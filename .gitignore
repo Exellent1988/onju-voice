@@ -1,3 +1,5 @@
 onjuino/include/credentials.h
 .DS_Store
 
+server_data/config/config.yaml
+server_data/config/voices.json
