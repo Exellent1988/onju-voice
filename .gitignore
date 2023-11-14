@@ -3,3 +3,4 @@ onjuino/include/credentials.h
 
 server_data/config/config.yaml
 server_data/config/voices.json
+docker-compose.yaml
