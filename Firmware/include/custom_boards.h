@@ -61,6 +61,26 @@
 
 #define USE_PSRAM
 
+#elif defined(BOARD_CUSTOM)
+
+    #define BOARD_NAME "ESP32-S3"
+    #define I2S_NUM I2S_NUM_0
+    #define I2S_BCK_PIN 40
+    #define I2S_WS_PIN 42
+    #define I2S_IN 41
+    #define I2S_OUT 38
+
+    #define MUTE 14
+    #define SPEAKER_EN 13
+
+    #define LED_PIN 48
+    #define LED_COUNT 1
+
+    #define T_L T4
+    #define T_C T5
+    #define T_R T6
+
+    #define USE_PSRAM
 #else
 #error "No board defined!"
 #endif
